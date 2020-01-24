@@ -2,9 +2,9 @@ import os
 
 from aiogram import Bot, Dispatcher, executor, types
 
-from quotes.ibash import random_ibash_quote
-from quotes.loglist import random_loglist_quote
-from crypto.rates import get_crypto_rates
+from .quotes.ibash import random_ibash_quote
+from .quotes.loglist import random_loglist_quote
+from .crypto.rates import get_crypto_rates
 
 API_TOKEN = os.environ.get('API_TOKEN')
 
@@ -38,5 +38,9 @@ async def crypto_rates(message: types.Message):
     await message.reply(rates, parse_mode='Markdown')
 
 
-if __name__ == "__main__":
+def main():
     executor.start_polling(dp)
+
+
+if __name__ == "__main__":
+    main()

@@ -2,7 +2,7 @@ import json
 
 import httpx
 
-from crypto.database import get_cryptos, get_currencies
+from .database import get_cryptos, get_currencies
 
 
 async def get_crypto_rates():

@@ -2,9 +2,10 @@ import os
 
 from aiogram import Bot, Dispatcher, executor, types
 
+from .crypto.rates import get_crypto_rates
 from .quotes.ibash import random_ibash_quote
 from .quotes.loglist import random_loglist_quote
-from .crypto.rates import get_crypto_rates
+from .switch import switch
 
 API_TOKEN = os.environ.get('API_TOKEN')
 
@@ -36,6 +37,14 @@ async def loglist_quote(message: types.Message):
 async def crypto_rates(message: types.Message):
     rates = await get_crypto_rates()
     await message.reply(rates, parse_mode='Markdown')
+
+@dp.message_handler(commands=['switch'])
+async def switch_layout(message: types.Message):
+    if message.reply_to_message is None:
+        await message.reply("Should be used as a reply only!")
+    else:
+        switched_message = switch(message.reply_to_message.text)
+        await message.reply(switched_message)
 
 
 def main():

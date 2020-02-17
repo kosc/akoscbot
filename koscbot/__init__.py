@@ -1,4 +1,5 @@
 import os
+import logging
 
 from aiogram import Bot, Dispatcher, executor, types
 
@@ -11,6 +12,7 @@ API_TOKEN = os.environ.get('API_TOKEN')
 
 bot = Bot(token=API_TOKEN)
 dp = Dispatcher(bot)
+logging.basicConfig(filename='akoscbot.log', level=logging.INFO)
 
 
 @dp.message_handler(commands=['start', 'help'])

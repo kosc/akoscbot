@@ -1,5 +1,6 @@
 import os
 import logging
+from logging.handlers import RotatingFileHandler
 
 from aiogram import Bot, Dispatcher, executor, types
 
@@ -12,7 +13,12 @@ API_TOKEN = os.environ.get('API_TOKEN')
 
 bot = Bot(token=API_TOKEN)
 dp = Dispatcher(bot)
-logging.basicConfig(filename='akoscbot.log', level=logging.INFO)
+logging.basicConfig(
+    level=logging.INFO,
+    handlers=[
+        RotatingFileHandler('akoscbot.log', 'a', 50000, 5)
+    ]
+)
 
 
 @dp.message_handler(commands=['start', 'help'])

@@ -4,6 +4,12 @@ import httpx
 
 from .database import get_cryptos, get_currencies
 
+F_CURRENCIES = [
+    "USD",
+    "EUR",
+    "RUR",
+]
+
 
 async def get_crypto_rates():
     cryptos = await get_cryptos()
@@ -15,6 +21,6 @@ async def get_crypto_rates():
     for crypto, rates in json.loads(r.content).items():
         message += crypto + ":\n"
         for currency, rate in rates.items():
-            message += "    " + currency + ": " + f"{rate:.2f}" if currency in ["RUR", "USD", "EUR"] else rate + "\n"
+            message += "    " + currency + ": " + f"{rate:.2f}" if currency in F_CURRENCIES else rate + "\n"
     message += "```"
     return message

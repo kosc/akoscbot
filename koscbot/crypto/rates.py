@@ -15,6 +15,6 @@ async def get_crypto_rates():
     for crypto, rates in json.loads(r.content).items():
         message += crypto + ":\n"
         for currency, rate in rates.items():
-            message += "    " + currency + ": " + f"{rate:.2f}" + "\n"
+            message += "    " + currency + ": " + f"{rate:.2f}" if currency in currencies else rate + "\n"
     message += "```"
     return message
